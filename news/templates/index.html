@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}News{% endblock %}
+
+{% block news_content %}
+
+	{% for caption in all_captions %}
+	<button class="accordion">{{caption.c_topic}}</button>
+	<div class="panel">
+		<table class="news_item">
+		<tr>
+			<td class="news_logo">
+			<a href="{{caption.source.s_link}}" target="_blank"><img src="{{caption.source.s_logo}}" width="30px" alt="{{caption.source.s_name}}" title="{{caption.source.s_name}}"></a>
+			</td>
+			<td class="news_text" rowspan="3">
+			<p>{{caption.c_text}}<a href="{{caption.c_link}}" target="_blank">...</a></p>
+			</td>
+		</tr>
+		<tr>
+			<td class="news_time">
+			<p>{{caption.c_time.strftime('%d.%m.%Y %H:%M')}}</p>
+			</td>
+		</tr>
+		<tr>
+			<td class="news_link">
+			<a href="{{caption.c_link}}" target="_blank">Подробнее...</a>
+			</td>
+		</tr>
+		</table>
+	</div>
+	{% endfor %}
+	
+{% endblock %}
+
+{% block scripts %}
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	  acc[i].onclick = function() {
+		this.classList.toggle("active");
+		var panel = this.nextElementSibling;
+		if (panel.style.maxHeight){
+		  panel.style.maxHeight = null;
+		} else {
+		  panel.style.maxHeight = panel.scrollHeight + "px";
+		} 
+	  }
+	}
+{% endblock %}

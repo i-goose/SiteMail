@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>
+	{% block title %}gooSe{% endblock %}
+	</title>
+	
+	<link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href="../static/style.css">
+	
+	<script type="text/javascript" src="../static/jquery-3.2.0.js"></script>
+	
+{% block head %}
+{% endblock %}
+</head>
+<body>
+	<main>
+		<div class="tab">
+		  <button class="tablinks" onclick="openTab(event, 'News')" id="defaultOpen">News</button>
+		  <button class="tablinks" onclick="openTab(event, 'Tech')">Tech</button>
+		  <button class="tablinks" onclick="openTab(event, 'Rest')">Rest</button>
+		</div>
+			
+		<div class="middle_box">
+			<div id="News" class="tabcontent">
+				{% block news_content %}
+				{% endblock %}
+			</div>
+
+			<div id="Tech" class="tabcontent">
+				{% block tech_content %}
+				{% endblock %}
+			</div>
+
+			<div id="Rest" class="tabcontent">
+				{% block rest_content %}
+				{% endblock %}
+			</div>
+		</div>
+	</main>
+	<script>
+	function openTab(evt, tabName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		}
+		document.getElementById(tabName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+
+	// Get the element with id="defaultOpen" and click on it
+	document.getElementById("defaultOpen").click();
+	</script>
+
+	<script>
+	{% block scripts %}
+	{% endblock %}
+	</script>
+</body>
+</html>
